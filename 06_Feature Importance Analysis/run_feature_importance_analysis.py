@@ -293,7 +293,7 @@ print('Files saved:')
 for p in [rf_csv, xgb_csv, shap_csv, comparison_csv, sensor_csv, rf_plot, xgb_plot, shap_plot, comparison_plot, sensor_plot, summary_md]:
     print(f'  - {p}')
 print()
-print('Ready for the final phase: Maintenance Recommendations and Conclusion')
+
 print('=' * 80)
 
 

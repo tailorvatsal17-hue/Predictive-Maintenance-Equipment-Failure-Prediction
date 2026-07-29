@@ -57,26 +57,26 @@ SHAP provides model-agnostic additive explanations and is suitable for neural ne
 ### Neural Network SHAP
 |                           |        0 |
 |:--------------------------|---------:|
-| Sensor_6_cumulative_delta | 15.0935  |
-| Sensor_9_cumulative_delta | 14.3719  |
-| Sensor_9_rolling_mean_5   | 14.2264  |
-| Sensor_4_rolling_mean_5   |  4.37406 |
-| Sensor_11_lag_1           |  4.04907 |
-| Sensor_12                 |  3.99237 |
-| Sensor_13                 |  2.98702 |
-| Sensor_3_lag_1            |  2.59796 |
-| Sensor_3_delta            |  2.29001 |
-| Sensor_3_rolling_mean_10  |  2.28433 |
-| Sensor_8                  |  2.2441  |
-| Sensor_13_lag_1           |  2.18775 |
-| Sensor_3                  |  2.14078 |
-| Sensor_13_delta           |  2.12322 |
-| Sensor_21                 |  2.11762 |
-| Sensor_11_lag_5           |  2.0081  |
-| Sensor_11_lag_3           |  1.99853 |
-| Sensor_8_rolling_mean_5   |  1.95257 |
-| Sensor_17_rolling_mean_10 |  1.92071 |
-| Sensor_15_lag_1           |  1.91791 |
+| Sensor_6_cumulative_delta | 15.3893  |
+| Sensor_9_cumulative_delta | 14.6851  |
+| Sensor_9_rolling_mean_5   | 13.311   |
+| Sensor_4_rolling_mean_5   |  4.28923 |
+| Sensor_11_lag_1           |  3.96548 |
+| Sensor_12                 |  3.67377 |
+| Sensor_13                 |  2.9449  |
+| Sensor_3_lag_1            |  2.49432 |
+| Sensor_3_rolling_mean_10  |  2.39238 |
+| Sensor_3                  |  2.23318 |
+| Sensor_3_delta            |  2.21387 |
+| Sensor_8                  |  2.20842 |
+| Sensor_13_delta           |  2.09451 |
+| Sensor_12_lag_5           |  2.00551 |
+| Sensor_17_lag_1           |  1.99747 |
+| Sensor_15_lag_1           |  1.98779 |
+| Sensor_21                 |  1.92999 |
+| Sensor_11_lag_5           |  1.92413 |
+| Sensor_13_lag_1           |  1.9066  |
+| Sensor_8_rolling_mean_5   |  1.82644 |
 
 ## Consistently Important Sensors
 
@@ -84,9 +84,9 @@ SHAP provides model-agnostic additive explanations and is suitable for neural ne
 - Sensor_6
 - Sensor_3
 - Sensor_13
+- Sensor_12
 - Sensor_11
 - Sensor_4
-- Sensor_12
 - Sensor_8
 - Sensor_17
 - Sensor_21
