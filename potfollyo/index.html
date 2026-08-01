@@ -18,10 +18,28 @@
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Google Fonts loaded non-render-blocking via the `print` → `all` swap.
+      Without this, the browser waits up to ~10 s on `fonts.googleapis.com`
+      before the first paint on Vercel — leaving the user staring at a
+      blank `#root`. With the swap, the page paints immediately using the
+      `system-ui` fallbacks declared in `globals.css`, and Inter / Plus
+      Jakarta Sans upgrade silently once the font files arrive.
+      `display=swap` on the URL further guarantees the browser never hides
+      text while waiting for the woff2 payloads.
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      />
+    </noscript>
     <title>Vatsal Tailor — MSc Dissertation Portfolio</title>
   </head>
   <body>
