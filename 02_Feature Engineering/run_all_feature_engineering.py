@@ -18,10 +18,9 @@ import sys
 import subprocess
 from pathlib import Path
 
-# Project directories
-PROJECT_DIR = Path("C:/Users/Vatsal/OneDrive/Desktop/msc project")
-DATA_DIR = PROJECT_DIR / "data_cleaning"
-SCRIPT_DIR = Path(__file__).parent
+# Project directories (dynamic, works on any computer)
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
 
 # Scripts to execute
 SCRIPTS = [
@@ -98,7 +97,7 @@ output_files = [
 ]
 
 for output_file in output_files:
-    output_path = DATA_DIR / output_file
+    output_path = SCRIPT_DIR / output_file
     if output_path.exists():
         size = output_path.stat().st_size
         if size > 1024 * 1024:

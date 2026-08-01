@@ -29,6 +29,7 @@ import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
+from pathlib import Path
 
 # Set visualization style
 sns.set_style("whitegrid")
@@ -38,15 +39,25 @@ sns.set_style("whitegrid")
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 # =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+SCRIPT_DIR = Path(__file__).resolve().parent
+LOAD_DIR    = SCRIPT_DIR / "loaded"
+OUTPUT_DIR  = SCRIPT_DIR / "statistics"
+VIZ_DIR     = SCRIPT_DIR / "visualizations"  # visualizations sub-folder inside this phase
+LOAD_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+VIZ_DIR.mkdir(parents=True, exist_ok=True)
+
+# =====================================================================================
 # LOAD DATA FROM PREVIOUS STEP
 # =====================================================================================
 print("=" * 85)
 print("LOADING DATA FROM PREVIOUS STEP")
 print("=" * 85)
 
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-train_data = pd.read_csv(os.path.join(data_path, "train_FD001_loaded.csv"))
-test_data = pd.read_csv(os.path.join(data_path, "test_FD001_loaded.csv"))
+train_data = pd.read_csv(LOAD_DIR / "train_FD001_loaded.csv")
+test_data = pd.read_csv(LOAD_DIR / "test_FD001_loaded.csv")
 
 print("✓ Data loaded successfully")
 
@@ -368,9 +379,7 @@ for idx, col in enumerate(sensor_cols):
     ax.legend(fontsize=8)
 
 plt.tight_layout()
-viz_dir = os.path.join(data_path, "visualizations")
-os.makedirs(viz_dir, exist_ok=True)
-plt.savefig(os.path.join(viz_dir, 'outlier_detection.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'outlier_detection.png', dpi=300, bbox_inches='tight')
 print("✓ Saved: outlier_detection.png")
 plt.close()
 
@@ -434,7 +443,7 @@ NEXT STEP: Decide on column removal and scaling method
 """)
 
 # Save outlier analysis
-outlier_df.to_csv(os.path.join(data_path, 'outlier_analysis_train.csv'), index=False)
-outlier_df_test.to_csv(os.path.join(data_path, 'outlier_analysis_test.csv'), index=False)
+outlier_df.to_csv(OUTPUT_DIR / 'outlier_analysis_train.csv', index=False)
+outlier_df_test.to_csv(OUTPUT_DIR / 'outlier_analysis_test.csv', index=False)
 
 print("\n✓ Outlier analysis saved to CSV files")

@@ -1,0 +1,4 @@
+Step 5-6 (Data Types & Missing Values): COMPLETED
+Training data shape: (20631, 26)
+Test data shape: (13096, 26)
+Status: No data quality issues found

@@ -29,23 +29,30 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ============================================================================
-# SETUP & CONFIGURATION
+# SETUP & CONFIGURATION (dynamic, works on any computer)
 # ============================================================================
 
-PROJECT_DIR = Path("C:/Users/Vatsal/OneDrive/Desktop/msc project")
-DATA_DIR = PROJECT_DIR / "data_cleaning"
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Inputs come from this phase's previous step (also in this folder)
+# Plus raw scaled data from Phase 1 folder
+PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
 
 # File paths
-TRAIN_FINAL_INPUT = DATA_DIR / "train_FD001_engineered_final.csv"
-TEST_SCALED_FILE = DATA_DIR / "test_FD001_scaled.csv"
-TEST_REFERENCE_FILE = DATA_DIR / "test_reference.csv"
-RUL_REFERENCE_FILE = DATA_DIR / "rul_reference.csv"
+TRAIN_FINAL_INPUT = SCRIPT_DIR / "train_FD001_engineered_final.csv"
+TEST_SCALED_FILE = PHASE1_DIR / "test_FD001_scaled.csv"
+TEST_REFERENCE_FILE = PHASE1_DIR / "test_reference.csv"
+RUL_REFERENCE_FILE = PHASE1_DIR / "rul_reference.csv"
 
 # Output files
-TRAIN_OUTPUT = DATA_DIR / "train_FD001_engineered.csv"
-TEST_OUTPUT = DATA_DIR / "test_FD001_engineered.csv"
-VALIDATION_REPORT = DATA_DIR / "FEATURE_ENGINEERING_VALIDATION.md"
-FEATURE_LIST = DATA_DIR / "ENGINEERED_FEATURES_LIST.txt"
+TRAIN_OUTPUT = SCRIPT_DIR / "train_FD001_engineered.csv"
+TEST_OUTPUT = SCRIPT_DIR / "test_FD001_engineered.csv"
+VALIDATION_REPORT = SCRIPT_DIR / "FEATURE_ENGINEERING_VALIDATION.md"
+FEATURE_LIST = SCRIPT_DIR / "ENGINEERED_FEATURES_LIST.txt"
+
+# Make sure output directory exists
+SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
 print("FEATURE ENGINEERING - PART 4: VALIDATION & FINALIZATION")

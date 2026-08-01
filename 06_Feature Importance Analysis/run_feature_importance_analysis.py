@@ -28,12 +28,19 @@ import seaborn as sns
 import shap
 from sklearn.inspection import permutation_importance
 
-BASE_DIR = Path(r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning")
-MODEL_DIR = BASE_DIR / '03_Model Training' / 'models'
-OUT_DIR = BASE_DIR / '06_Feature Importance Analysis' / 'feature_importance_analysis'
+# Dynamic project paths - works on any computer
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Models come from Phase 3
+MODEL_DIR = PROJECT_DIR / '03_Model Training' / 'models'
+
+# All Phase-6 outputs go in this phase folder
+OUT_DIR = SCRIPT_DIR / 'feature_importance_analysis'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-TRAIN_FILE = BASE_DIR / 'train_FD001_engineered.csv'
+# Engineered training data comes from Phase 2
+TRAIN_FILE = PROJECT_DIR / '02_Feature Engineering' / 'train_FD001_engineered.csv'
 METADATA_FILE = MODEL_DIR / 'training_metadata.json'
 
 RF_MODEL_FILE = MODEL_DIR / 'random_forest_rul.joblib'

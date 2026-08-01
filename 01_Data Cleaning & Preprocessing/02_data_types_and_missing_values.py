@@ -18,10 +18,20 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
 
 # Set visualization style
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (12, 6)
+
+# =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+SCRIPT_DIR = Path(__file__).resolve().parent
+LOAD_DIR    = SCRIPT_DIR / "loaded"
+OUTPUT_DIR  = SCRIPT_DIR / "statistics"
+LOAD_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # =====================================================================================
 # LOAD DATA FROM PREVIOUS STEP
@@ -30,11 +40,10 @@ print("=" * 85)
 print("LOADING DATA FROM PREVIOUS STEP")
 print("=" * 85)
 
-# Load the cleaned data from previous step
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-train_data = pd.read_csv(os.path.join(data_path, "train_FD001_loaded.csv"))
-test_data = pd.read_csv(os.path.join(data_path, "test_FD001_loaded.csv"))
-rul_data = pd.read_csv(os.path.join(data_path, "rul_FD001_loaded.csv"))
+# Load the cleaned data from previous step (same folder as this script)
+train_data = pd.read_csv(LOAD_DIR / "train_FD001_loaded.csv")
+test_data = pd.read_csv(LOAD_DIR / "test_FD001_loaded.csv")
+rul_data = pd.read_csv(LOAD_DIR / "rul_FD001_loaded.csv")
 
 print("[OK] Data loaded successfully")
 
@@ -233,7 +242,7 @@ NEXT STEP: Check for duplicate rows and constant/near-constant columns
 """)
 
 # Save status for next step
-with open(os.path.join(data_path, "step5_6_status.txt"), 'w') as f:
+with open(OUTPUT_DIR / "step5_6_status.txt", 'w') as f:
     f.write("Step 5-6 (Data Types & Missing Values): COMPLETED\n")
     f.write(f"Training data shape: {train_data.shape}\n")
     f.write(f"Test data shape: {test_data.shape}\n")

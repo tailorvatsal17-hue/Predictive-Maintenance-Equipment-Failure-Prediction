@@ -1,0 +1,11 @@
+Metric,Value
+Total engines,100.0
+Healthy engines,24.0
+Schedule Maintenance engines,42.0
+Maintenance Required engines,15.0
+Immediate Inspection engines,19.0
+Average predicted RUL (cycles),81.88
+Highest predicted RUL (cycles),202.03
+Lowest predicted RUL (cycles),2.67
+Standard deviation of predicted RUL (cycles),50.42
+Median predicted RUL (cycles),83.7

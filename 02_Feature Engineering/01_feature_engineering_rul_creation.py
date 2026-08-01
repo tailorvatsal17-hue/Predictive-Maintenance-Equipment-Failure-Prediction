@@ -26,18 +26,26 @@ import os
 from pathlib import Path
 
 # ============================================================================
-# SETUP & CONFIGURATION
+# SETUP & CONFIGURATION (dynamic, works on any computer)
 # ============================================================================
 
 # Project directories
-PROJECT_DIR = Path("C:/Users/Vatsal/OneDrive/Desktop/msc project")
-DATA_DIR = PROJECT_DIR / "data_cleaning"
-OUTPUT_DIR = DATA_DIR
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Phase-1 outputs live in the "01_Data Cleaning & Preprocessing" folder
+PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
+
+# Phase-2 outputs go in THIS folder
+OUTPUT_DIR = SCRIPT_DIR
 
 # File paths
-TRAIN_SCALED_FILE = DATA_DIR / "train_FD001_scaled.csv"
-TRAIN_REFERENCE_FILE = DATA_DIR / "train_reference.csv"
-RUL_GROUND_TRUTH_FILE = DATA_DIR / "rul_reference.csv"
+TRAIN_SCALED_FILE = PHASE1_DIR / "train_FD001_scaled.csv"
+TRAIN_REFERENCE_FILE = PHASE1_DIR / "train_reference.csv"
+RUL_GROUND_TRUTH_FILE = PHASE1_DIR / "rul_reference.csv"
+
+# Make sure the output directory exists
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
 print("FEATURE ENGINEERING - PART 1: RUL TARGET VARIABLE CREATION")
@@ -55,15 +63,15 @@ try:
     # Load scaled training features
     train_scaled = pd.read_csv(TRAIN_SCALED_FILE)
     print(f"[OK] Loaded scaled training data: {train_scaled.shape}")
-    
+
     # Load reference data (Unit_Number, Time_Cycles)
     train_reference = pd.read_csv(TRAIN_REFERENCE_FILE)
     print(f"[OK] Loaded training reference data: {train_reference.shape}")
-    
+
     # Load ground truth RUL values
     rul_ground_truth = pd.read_csv(RUL_GROUND_TRUTH_FILE)
     print(f"[OK] Loaded RUL ground truth: {rul_ground_truth.shape}")
-    
+
 except FileNotFoundError as e:
     print(f"[ERROR] {e}")
     exit(1)

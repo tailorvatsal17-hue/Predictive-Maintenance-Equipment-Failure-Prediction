@@ -29,15 +29,21 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ============================================================================
-# SETUP & CONFIGURATION
+# SETUP & CONFIGURATION (dynamic, works on any computer)
 # ============================================================================
 
-PROJECT_DIR = Path("C:/Users/Vatsal/OneDrive/Desktop/msc project")
-DATA_DIR = PROJECT_DIR / "data_cleaning"
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Inputs come from Phase 1 outputs in the previous folder
+PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
 
 # File paths
-INPUT_FILE = DATA_DIR / "train_FD001_with_rul.csv"
-OUTPUT_FILE = DATA_DIR / "train_FD001_with_timeseries_features.csv"
+INPUT_FILE = PHASE1_DIR / "train_FD001_with_rul.csv"
+OUTPUT_FILE = SCRIPT_DIR / "train_FD001_with_timeseries_features.csv"
+
+# Make sure output directory exists
+SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Feature engineering parameters
 ROLLING_WINDOWS = [3, 5, 10]  # Cycle windows for rolling statistics

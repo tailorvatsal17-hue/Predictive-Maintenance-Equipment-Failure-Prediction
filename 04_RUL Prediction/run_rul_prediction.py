@@ -23,18 +23,28 @@ import joblib
 import numpy as np
 import pandas as pd
 
-BASE_DIR = Path(r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning")
-MODEL_DIR = BASE_DIR / "03_Model Training" / "models"
-TEST_FILE = BASE_DIR / "test_FD001_engineered.csv"
+# Dynamic project paths - works on any computer
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Models come from Phase 3's "models" subfolder
+MODEL_DIR = PROJECT_DIR / "03_Model Training" / "models"
+
+# Test data comes from Phase 2's outputs
+TEST_FILE = PROJECT_DIR / "02_Feature Engineering" / "test_FD001_engineered.csv"
 METADATA_FILE = MODEL_DIR / "training_metadata.json"
 
 RF_MODEL_FILE = MODEL_DIR / "random_forest_rul.joblib"
 XGB_MODEL_FILE = MODEL_DIR / "xgboost_rul.joblib"
 NN_MODEL_FILE = MODEL_DIR / "neural_network_rul.joblib"
 
-OUTPUT_RF = BASE_DIR / "04_RUL Prediction" / "random_forest_predictions.csv"
-OUTPUT_XGB = BASE_DIR / "04_RUL Prediction" / "xgboost_predictions.csv"
-OUTPUT_NN = BASE_DIR / "04_RUL Prediction" / "neural_network_predictions.csv"
+# Predictions are saved in THIS phase's folder
+OUTPUT_RF = SCRIPT_DIR / "random_forest_predictions.csv"
+OUTPUT_XGB = SCRIPT_DIR / "xgboost_predictions.csv"
+OUTPUT_NN = SCRIPT_DIR / "neural_network_predictions.csv"
+
+# Make sure the output directory exists
+SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
 print("RUL PREDICTION PIPELINE")

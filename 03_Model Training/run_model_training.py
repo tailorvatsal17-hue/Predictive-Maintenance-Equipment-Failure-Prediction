@@ -33,10 +33,19 @@ except ImportError as exc:
         "xgboost is required for this training pipeline. Install it before running."
     ) from exc
 
-BASE_DIR = Path(r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning")
-TRAIN_FILE = BASE_DIR / "train_FD001_engineered.csv"
-MODEL_DIR = BASE_DIR / "03_Model Training" / "models"
+# Dynamic project paths - works on any computer
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Phase-2 outputs live in the "02_Feature Engineering" folder
+PHASE2_DIR = PROJECT_DIR / "02_Feature Engineering"
+
+# All model artefacts are saved in this phase's "models" subfolder
+MODEL_DIR = SCRIPT_DIR / "models"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
+
+# Engineered training data produced by Phase 2
+TRAIN_FILE = PHASE2_DIR / "train_FD001_engineered.csv"
 
 TARGET_COL = "RUL"
 DROP_COLS = ["Unit_Number", "Time_Cycles", TARGET_COL]

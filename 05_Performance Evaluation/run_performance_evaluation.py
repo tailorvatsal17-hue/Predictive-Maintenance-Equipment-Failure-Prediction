@@ -30,16 +30,36 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-BASE_DIR = Path(r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning")
-GROUND_TRUTH_FILE = Path(r"C:\Users\Vatsal\OneDrive\Desktop\msc project\CMAPSSData\RUL_FD001.txt")
+# Dynamic project paths - works on any computer
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Predictions come from Phase 4
+PHASE4_DIR = PROJECT_DIR / "04_RUL Prediction"
+
+# RUL ground truth is produced by Phase 1 (kept inside its folder)
+PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
+
+# Original NASA .txt file - prefer a sibling CMAPSSData folder
+SOURCE_DIR = PROJECT_DIR / "CMAPSSData"
+if not SOURCE_DIR.exists():
+    SOURCE_DIR = PHASE1_DIR
+
+GROUND_TRUTH_FILE = SOURCE_DIR / "RUL_FD001.txt"
+
+# If the .txt file doesn't exist, fall back to the CSV written by Phase 1
+if not GROUND_TRUTH_FILE.exists():
+    candidate = PHASE1_DIR / "RUL_FD001_reference.csv"
+    if candidate.exists():
+        GROUND_TRUTH_FILE = candidate
 
 PRED_FILES = {
-    "Random Forest": BASE_DIR / "04_RUL Prediction" / "random_forest_predictions.csv",
-    "XGBoost": BASE_DIR / "04_RUL Prediction" / "xgboost_predictions.csv",
-    "Neural Network": BASE_DIR / "04_RUL Prediction" / "neural_network_predictions.csv",
+    "Random Forest": PHASE4_DIR / "random_forest_predictions.csv",
+    "XGBoost": PHASE4_DIR / "xgboost_predictions.csv",
+    "Neural Network": PHASE4_DIR / "neural_network_predictions.csv",
 }
 
-OUTPUT_DIR = BASE_DIR / "05_Performance Evaluation" / "performance_evaluation"
+OUTPUT_DIR = SCRIPT_DIR / "performance_evaluation"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 sns.set_theme(style="whitegrid")
@@ -50,7 +70,18 @@ print("=" * 80)
 print()
 
 print("Loading ground truth RUL values...")
-y_true = pd.read_csv(GROUND_TRUTH_FILE, header=None, names=["Actual_RUL"])['Actual_RUL'].astype(float)
+# The reference file may be the original .txt (no header) or a CSV written
+# by Phase 1 (header like "RUL_Actual" / "RUL").
+if GROUND_TRUTH_FILE.suffix.lower() == '.txt':
+    y_true = pd.read_csv(GROUND_TRUTH_FILE, header=None, names=["Actual_RUL"])['Actual_RUL'].astype(float)
+else:
+    # CSV produced by Phase 1 – pick the first numeric column regardless of its name
+    _df = pd.read_csv(GROUND_TRUTH_FILE)
+    _numeric = _df.select_dtypes(include=[np.number]).columns
+    if len(_numeric) == 0:
+        raise ValueError("Ground-truth CSV has no numeric columns.")
+    y_true = _df[_numeric[0]].astype(float)
+    y_true.name = "Actual_RUL"
 print(f"Ground truth shape: {y_true.shape}")
 print(f"Number of engines in ground truth: {len(y_true)}")
 print()

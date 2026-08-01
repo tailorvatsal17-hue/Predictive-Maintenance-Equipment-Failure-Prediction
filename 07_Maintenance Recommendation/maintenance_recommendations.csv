@@ -1,0 +1,101 @@
+Unit_Number,Predicted_RUL,Health_Status,Recommended_Action,Priority,Explanation
+1,194.19,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+2,152.84,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+3,60.94,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+4,94.04,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+5,124.94,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+6,109.74,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+7,107.36,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+8,83.84,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+9,147.36,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+10,98.23,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+11,105.92,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+12,95.19,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+13,85.05,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+14,125.04,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+15,102.74,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+16,202.03,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+17,50.69,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+18,44.5,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+19,92.96,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+20,16.14,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+21,70.13,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+22,118.52,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+23,121.24,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+24,19.62,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+25,165.5,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+26,104.49,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+27,73.04,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+28,138.43,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+29,93.4,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+30,89.7,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+31,11.0,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+32,47.8,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+33,133.4,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+34,5.98,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+35,7.26,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+36,15.65,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+37,42.12,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+38,44.08,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+39,134.66,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+40,30.15,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+41,11.07,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+42,6.55,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+43,88.49,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+44,112.54,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+45,69.79,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+46,37.56,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+47,92.2,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+48,87.24,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+49,14.18,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+50,78.01,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+51,83.55,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+52,28.75,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+53,32.14,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+54,162.16,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+55,200.49,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+56,20.13,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+57,80.42,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+58,57.39,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+59,131.68,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+60,78.19,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+61,23.49,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+62,52.17,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+63,72.19,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+64,38.22,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+65,156.48,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+66,16.51,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+67,89.35,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+68,8.33,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+69,137.37,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+70,93.45,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+71,144.12,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+72,63.13,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+73,90.98,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+74,114.26,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+75,86.31,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+76,2.67,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+77,34.06,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+78,182.38,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+79,74.4,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+80,73.07,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+81,5.08,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+82,11.27,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+83,162.93,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+84,60.32,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+85,147.84,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+86,151.85,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+87,125.61,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+88,109.23,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+89,110.46,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+90,33.0,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+91,30.12,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+92,16.74,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.
+93,59.4,Maintenance Required Soon,Plan maintenance,High,Schedule maintenance promptly to avoid imminent failure risk.
+94,63.05,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+95,95.79,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+96,121.34,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+97,71.1,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+98,72.99,Schedule Maintenance,Schedule preventive maintenance,Medium,Plan maintenance in the upcoming maintenance window to prevent escalation.
+99,138.22,Healthy,Continue normal operation,Low,Engine operates within healthy parameters; continue routine monitoring.
+100,16.66,Immediate Inspection Required,Inspect immediately,Critical,RUL is critically low; immediate inspection is required to prevent failure.

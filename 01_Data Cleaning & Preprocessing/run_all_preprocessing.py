@@ -31,6 +31,7 @@ from sklearn.preprocessing import RobustScaler
 import pickle
 import warnings
 warnings.filterwarnings('ignore')
+from pathlib import Path
 
 # Fix stdout encoding for Windows
 if sys.platform == 'win32':
@@ -46,16 +47,28 @@ print("NASA CMAPSS DATA CLEANING & PREPROCESSING - COMPLETE PIPELINE")
 print("=" * 90)
 
 # =====================================================================================
-# SETUP
+# DYNAMIC PROJECT PATHS  (works on any computer)
 # =====================================================================================
-data_folder_source = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\CMAPSSData"
-data_folder_output = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-viz_folder = os.path.join(data_folder_output, "visualizations")
-os.makedirs(viz_folder, exist_ok=True)
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent.parent  # <project>/
+
+# Source data files - prefer a sibling CMAPSSData folder, fall back to this folder
+SOURCE_DIR = PROJECT_DIR / "CMAPSSData"
+if not SOURCE_DIR.exists():
+    SOURCE_DIR = SCRIPT_DIR  # source files may also live in the phase folder
+
+# All phase-1 outputs go in the phase folder, organized by subfolder
+LOAD_DIR     = SCRIPT_DIR / "loaded"
+OUTPUT_DIR   = SCRIPT_DIR / "statistics"
+SHARED_DIR   = SCRIPT_DIR / "shared"
+METADATA_DIR = SCRIPT_DIR / "metadata"
+VIZ_DIR      = SCRIPT_DIR / "visualizations"
+for _d in (LOAD_DIR, OUTPUT_DIR, SHARED_DIR, METADATA_DIR, VIZ_DIR):
+    _d.mkdir(parents=True, exist_ok=True)
 
 print("\n[SETUP] Creating output directories...")
-print(f"  Output folder: {data_folder_output}")
-print(f"  Visualization folder: {viz_folder}")
+print(f"  Output folder: {OUTPUT_DIR}")
+print(f"  Visualization folder: {VIZ_DIR}")
 
 # =====================================================================================
 # STEP 1-4: LOAD AND EXPLORE DATA
@@ -64,9 +77,9 @@ print("\n" + "=" * 90)
 print("STEPS 1-4: LOADING AND EXPLORING DATA")
 print("=" * 90)
 
-train_file = os.path.join(data_folder_source, "train_FD001.txt")
-test_file = os.path.join(data_folder_source, "test_FD001.txt")
-rul_file = os.path.join(data_folder_source, "RUL_FD001.txt")
+train_file = SOURCE_DIR / "train_FD001.txt"
+test_file = SOURCE_DIR / "test_FD001.txt"
+rul_file = SOURCE_DIR / "RUL_FD001.txt"
 
 # Load data
 print("\n[LOAD] Reading NASA CMAPSS FD001 files...")
@@ -102,9 +115,9 @@ print(f"     Training data shape: {train_data.shape}")
 print(f"     Test data shape: {test_data.shape}")
 
 # Save for future use
-train_data.to_csv(os.path.join(data_folder_output, "train_FD001_loaded.csv"), index=False)
-test_data.to_csv(os.path.join(data_folder_output, "test_FD001_loaded.csv"), index=False)
-rul_data.to_csv(os.path.join(data_folder_output, "rul_FD001_loaded.csv"), index=False)
+train_data.to_csv(LOAD_DIR / "train_FD001_loaded.csv", index=False)
+test_data.to_csv(LOAD_DIR / "test_FD001_loaded.csv", index=False)
+rul_data.to_csv(LOAD_DIR / "rul_FD001_loaded.csv", index=False)
 print(f"[OK] Intermediate CSV files saved")
 
 # =====================================================================================
@@ -168,7 +181,7 @@ stats_df = train_data.describe().T
 stats_df['skewness'] = [train_data[col].skew() for col in train_data.columns]
 stats_df['kurtosis'] = [train_data[col].kurtosis() for col in train_data.columns]
 
-stats_df.to_csv(os.path.join(data_folder_output, "descriptive_statistics.csv"))
+stats_df.to_csv(OUTPUT_DIR / "descriptive_statistics.csv")
 print(f"[OK] Statistics saved to descriptive_statistics.csv")
 
 print("\n[VIZ] Creating visualizations...")
@@ -183,7 +196,7 @@ for idx, col in enumerate(sensor_cols):
     axes[idx].set_xlabel('Value')
     axes[idx].set_ylabel('Frequency')
 plt.tight_layout()
-plt.savefig(os.path.join(viz_folder, "sensor_distributions.png"), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / "sensor_distributions.png", dpi=300, bbox_inches='tight')
 plt.close()
 print(f"[OK] Saved: sensor_distributions.png")
 
@@ -195,7 +208,7 @@ for idx, col in enumerate(sensor_cols):
     axes[idx].set_title(col, fontsize=9)
     axes[idx].set_ylabel('Value')
 plt.tight_layout()
-plt.savefig(os.path.join(viz_folder, "sensor_boxplots.png"), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / "sensor_boxplots.png", dpi=300, bbox_inches='tight')
 plt.close()
 print(f"[OK] Saved: sensor_boxplots.png")
 
@@ -277,7 +290,7 @@ for idx, col in enumerate(sample_sensors):
     axes[1, idx].set_title(f'{col} - AFTER', fontsize=10, fontweight='bold')
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_folder, "before_after_scaling.png"), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / "before_after_scaling.png", dpi=300, bbox_inches='tight')
 plt.close()
 print(f"[OK] Saved: before_after_scaling.png")
 
@@ -291,25 +304,25 @@ print("=" * 90)
 print("\n[SAVE] Writing output files...")
 
 # Save scaled data
-train_scaled_df.to_csv(os.path.join(data_folder_output, "train_FD001_scaled.csv"), index=False)
-test_scaled_df.to_csv(os.path.join(data_folder_output, "test_FD001_scaled.csv"), index=False)
+train_scaled_df.to_csv(SHARED_DIR / "train_FD001_scaled.csv", index=False)
+test_scaled_df.to_csv(SHARED_DIR / "test_FD001_scaled.csv", index=False)
 print(f"[OK] train_FD001_scaled.csv ({train_scaled_df.shape})")
 print(f"[OK] test_FD001_scaled.csv ({test_scaled_df.shape})")
 
 # Save reference files
 train_data[['Unit_Number', 'Time_Cycles']].to_csv(
-    os.path.join(data_folder_output, "train_reference.csv"), index=False)
+    SHARED_DIR / "train_reference.csv", index=False)
 test_data[['Unit_Number', 'Time_Cycles']].to_csv(
-    os.path.join(data_folder_output, "test_reference.csv"), index=False)
+    SHARED_DIR / "test_reference.csv", index=False)
 print(f"[OK] train_reference.csv")
 print(f"[OK] test_reference.csv")
 
 # Save RUL data
-rul_data.to_csv(os.path.join(data_folder_output, "rul_reference.csv"), index=False)
+rul_data.to_csv(SHARED_DIR / "rul_reference.csv", index=False)
 print(f"[OK] rul_reference.csv")
 
 # Save scaler
-with open(os.path.join(data_folder_output, "robust_scaler.pkl"), 'wb') as f:
+with open(METADATA_DIR / "robust_scaler.pkl", 'wb') as f:
     pickle.dump(robust_scaler, f)
 print(f"[OK] robust_scaler.pkl")
 

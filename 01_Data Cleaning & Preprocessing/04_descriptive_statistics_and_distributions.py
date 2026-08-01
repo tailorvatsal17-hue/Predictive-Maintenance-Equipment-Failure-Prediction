@@ -29,10 +29,22 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
+from pathlib import Path
 
 # Set visualization style
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (16, 10)
+
+# =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+SCRIPT_DIR = Path(__file__).resolve().parent
+LOAD_DIR    = SCRIPT_DIR / "loaded"
+OUTPUT_DIR  = SCRIPT_DIR / "statistics"
+VIZ_DIR     = SCRIPT_DIR / "visualizations"  # visualizations sub-folder inside this phase
+LOAD_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+VIZ_DIR.mkdir(parents=True, exist_ok=True)
 
 # =====================================================================================
 # LOAD DATA FROM PREVIOUS STEP
@@ -41,10 +53,9 @@ print("=" * 85)
 print("LOADING DATA FROM PREVIOUS STEP")
 print("=" * 85)
 
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-train_data = pd.read_csv(os.path.join(data_path, "train_FD001_loaded.csv"))
-test_data = pd.read_csv(os.path.join(data_path, "test_FD001_loaded.csv"))
-rul_data = pd.read_csv(os.path.join(data_path, "rul_FD001_loaded.csv"))
+train_data = pd.read_csv(LOAD_DIR / "train_FD001_loaded.csv")
+test_data = pd.read_csv(LOAD_DIR / "test_FD001_loaded.csv")
+rul_data = pd.read_csv(LOAD_DIR / "rul_FD001_loaded.csv")
 
 # Some pipelines save the RUL ground truth under "RUL", others as "RUL_Actual".
 # Detect whichever exists so the script doesn't crash with KeyError.
@@ -186,25 +197,23 @@ print("""
    - Histogram shape reveals distribution type
    - Box plots show outliers and quartiles
    - Density plots show multi-modal distributions
-   
+
 2. OUTLIER DETECTION:
    - Visual identification of extreme values
    - Understand outlier magnitude and frequency
-   
+
 3. DATA QUALITY ISSUES:
    - Bimodal distributions may suggest data from two sources
    - Gaps in data reveal data collection issues
    - Artifacts reveal measurement errors
-   
+
 4. PREPROCESSING DECISIONS:
    - Distribution shape affects choice of scaling method
    - Outliers may need special handling
    - Normality affects some ML algorithms
 """)
 
-# Create visualization directory
-viz_dir = os.path.join(data_path, "visualizations")
-os.makedirs(viz_dir, exist_ok=True)
+# Visualization directory already created above (VIZ_DIR inside this phase folder).
 
 # =====================================================================================
 # VISUALIZATION 1: Distribution of Sensor Columns (Training Data)
@@ -223,24 +232,24 @@ for idx, col in enumerate(sensor_cols):
     row = idx // 3
     col_idx = idx % 3
     ax = axes[row, col_idx]
-    
+
     ax.hist(train_data[col], bins=50, edgecolor='black', alpha=0.7, color='steelblue')
     ax.set_title(f'{col}', fontweight='bold')
     ax.set_xlabel('Value')
     ax.set_ylabel('Frequency')
     ax.grid(True, alpha=0.3)
-    
+
     # Add statistics to plot
     mean_val = train_data[col].mean()
     std_val = train_data[col].std()
     ax.axvline(mean_val, color='red', linestyle='--', linewidth=2, label=f'Mean: {mean_val:.2f}')
     ax.axvline(mean_val - std_val, color='orange', linestyle=':', linewidth=1.5, alpha=0.7)
-    ax.axvline(mean_val + std_val, color='orange', linestyle=':', linewidth=1.5, alpha=0.7, 
+    ax.axvline(mean_val + std_val, color='orange', linestyle=':', linewidth=1.5, alpha=0.7,
                label=f'±1 Std: {std_val:.2f}')
     ax.legend(fontsize=8)
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_dir, 'sensor_distributions_histogram.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'sensor_distributions_histogram.png', dpi=300, bbox_inches='tight')
 print("[OK] Saved: sensor_distributions_histogram.png")
 plt.close()
 
@@ -269,7 +278,7 @@ for idx, col in enumerate(sensor_cols):
     ax.text(1.15, train_data[col].max(), f'Outliers: {outliers}', fontsize=8, va='top')
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_dir, 'sensor_boxplots.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'sensor_boxplots.png', dpi=300, bbox_inches='tight')
 print("[OK] Saved: sensor_boxplots.png")
 plt.close()
 
@@ -304,7 +313,7 @@ for idx, col in enumerate(sensor_cols):
     ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_dir, 'sensor_density_plots.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'sensor_density_plots.png', dpi=300, bbox_inches='tight')
 print("[OK] Saved: sensor_density_plots.png")
 plt.close()
 
@@ -338,7 +347,7 @@ axes[2].fill_between(axes[2].get_lines()[0].get_xdata(), axes[2].get_lines()[0].
 axes[2].grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_dir, 'rul_distribution.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'rul_distribution.png', dpi=300, bbox_inches='tight')
 print("[OK] Saved: rul_distribution.png")
 plt.close()
 
@@ -363,7 +372,7 @@ for idx, col in enumerate(sensor_cols):
     ax.fill_between(engine_1_data['Time_Cycles'], engine_1_data[col], alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(os.path.join(viz_dir, 'sensor_trajectories_engine1.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'sensor_trajectories_engine1.png', dpi=300, bbox_inches='tight')
 print("[OK] Saved: sensor_trajectories_engine1.png")
 plt.close()
 
@@ -392,14 +401,14 @@ print(f"""
   - rul_distribution.png
   - sensor_trajectories_engine1.png
   
-[OK] FILES SAVED in: {viz_dir}
+[OK] FILES SAVED in: {VIZ_DIR}
 
 NEXT STEP: Outlier detection and analysis
 """)
 
 # Save statistics to CSV
-train_stats.to_csv(os.path.join(data_path, 'training_descriptive_stats.csv'))
-additional_stats.to_csv(os.path.join(data_path, 'training_additional_stats.csv'), index=False)
+train_stats.to_csv(OUTPUT_DIR / 'training_descriptive_stats.csv')
+additional_stats.to_csv(OUTPUT_DIR / 'training_additional_stats.csv', index=False)
 
 print("\n[OK] Statistics saved to CSV files")
 

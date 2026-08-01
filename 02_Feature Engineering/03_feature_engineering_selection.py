@@ -28,17 +28,23 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ============================================================================
-# SETUP & CONFIGURATION
+# SETUP & CONFIGURATION (dynamic, works on any computer)
 # ============================================================================
 
-PROJECT_DIR = Path("C:/Users/Vatsal/OneDrive/Desktop/msc project")
-DATA_DIR = PROJECT_DIR / "data_cleaning"
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+
+# Inputs come from this phase's previous step (also in this folder)
+# Phase 1 outputs are no longer needed here.
 
 # File paths
-INPUT_FILE = DATA_DIR / "train_FD001_with_timeseries_features.csv"
-OUTPUT_FILE = DATA_DIR / "train_FD001_engineered_final.csv"
-CORRELATION_REPORT = DATA_DIR / "correlation_analysis.csv"
-FEATURE_IMPORTANCE_REPORT = DATA_DIR / "feature_importance_statistical.csv"
+INPUT_FILE = SCRIPT_DIR / "train_FD001_with_timeseries_features.csv"
+OUTPUT_FILE = SCRIPT_DIR / "train_FD001_engineered_final.csv"
+CORRELATION_REPORT = SCRIPT_DIR / "correlation_analysis.csv"
+FEATURE_IMPORTANCE_REPORT = SCRIPT_DIR / "feature_importance_statistical.csv"
+
+# Make sure output directory exists
+SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Feature selection parameters
 CORRELATION_THRESHOLD = 0.95  # Remove features with correlation > 0.95 with others

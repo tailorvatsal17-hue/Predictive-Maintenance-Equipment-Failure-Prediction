@@ -21,9 +21,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler, RobustScaler, MinMaxScaler
 import pickle
+from pathlib import Path
 
 # Set visualization style
 sns.set_style("whitegrid")
+
+# =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+SCRIPT_DIR  = Path(__file__).resolve().parent
+LOAD_DIR     = SCRIPT_DIR / "loaded"
+OUTPUT_DIR   = SCRIPT_DIR / "statistics"
+SHARED_DIR   = SCRIPT_DIR / "shared"
+METADATA_DIR = SCRIPT_DIR / "metadata"
+VIZ_DIR      = SCRIPT_DIR / "visualizations"  # visualizations sub-folder inside this phase
+for _d in (LOAD_DIR, OUTPUT_DIR, SHARED_DIR, METADATA_DIR, VIZ_DIR):
+    _d.mkdir(parents=True, exist_ok=True)
 
 # =====================================================================================
 # LOAD DATA FROM PREVIOUS STEPS
@@ -32,10 +45,9 @@ print("=" * 85)
 print("LOADING DATA FROM PREVIOUS STEPS")
 print("=" * 85)
 
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-train_data = pd.read_csv(os.path.join(data_path, "train_FD001_loaded.csv"))
-test_data = pd.read_csv(os.path.join(data_path, "test_FD001_loaded.csv"))
-rul_data = pd.read_csv(os.path.join(data_path, "rul_FD001_loaded.csv"))
+train_data = pd.read_csv(LOAD_DIR / "train_FD001_loaded.csv")
+test_data = pd.read_csv(LOAD_DIR / "test_FD001_loaded.csv")
+rul_data = pd.read_csv(LOAD_DIR / "rul_FD001_loaded.csv")
 
 print("✓ Data loaded successfully")
 print(f"  - Training data: {train_data.shape}")
@@ -297,9 +309,7 @@ for idx, col in enumerate(sample_sensors):
     ax_after.grid(True, alpha=0.3)
 
 plt.tight_layout()
-viz_dir = os.path.join(data_path, "visualizations")
-os.makedirs(viz_dir, exist_ok=True)
-plt.savefig(os.path.join(viz_dir, 'before_after_scaling.png'), dpi=300, bbox_inches='tight')
+plt.savefig(VIZ_DIR / 'before_after_scaling.png', dpi=300, bbox_inches='tight')
 print("✓ Saved: before_after_scaling.png")
 plt.close()
 
@@ -315,14 +325,14 @@ print("-" * 85)
 
 # Save scaled training data
 train_scaled_df.to_csv(
-    os.path.join(data_path, "train_FD001_scaled.csv"),
+    SHARED_DIR / "train_FD001_scaled.csv",
     index=False
 )
 print("✓ Saved: train_FD001_scaled.csv")
 
 # Save scaled test data
 test_scaled_df.to_csv(
-    os.path.join(data_path, "test_FD001_scaled.csv"),
+    SHARED_DIR / "test_FD001_scaled.csv",
     index=False
 )
 print("✓ Saved: test_FD001_scaled.csv")
@@ -330,27 +340,27 @@ print("✓ Saved: test_FD001_scaled.csv")
 # Save original data with Unit_Number and Time_Cycles (for reference during feature engineering)
 train_ref = train_data[['Unit_Number', 'Time_Cycles']].copy()
 train_ref.to_csv(
-    os.path.join(data_path, "train_FD001_reference.csv"),
+    SHARED_DIR / "train_FD001_reference.csv",
     index=False
 )
 print("✓ Saved: train_FD001_reference.csv (Unit_Number + Time_Cycles)")
 
 test_ref = test_data[['Unit_Number', 'Time_Cycles']].copy()
 test_ref.to_csv(
-    os.path.join(data_path, "test_FD001_reference.csv"),
+    SHARED_DIR / "test_FD001_reference.csv",
     index=False
 )
 print("✓ Saved: test_FD001_reference.csv (Unit_Number + Time_Cycles)")
 
 # Save RUL data (for later use in evaluation)
 rul_data.to_csv(
-    os.path.join(data_path, "RUL_FD001_reference.csv"),
+    SHARED_DIR / "RUL_FD001_reference.csv",
     index=False
 )
 print("✓ Saved: RUL_FD001_reference.csv")
 
 # Save the scaler object for later use during prediction
-scaler_path = os.path.join(data_path, "robust_scaler.pkl")
+scaler_path = METADATA_DIR / "robust_scaler.pkl"
 with open(scaler_path, 'wb') as f:
     pickle.dump(robust_scaler, f)
 print(f"✓ Saved: robust_scaler.pkl (for applying to new data)")
@@ -370,7 +380,7 @@ metadata = {
 }
 
 import json
-with open(os.path.join(data_path, "preprocessing_metadata.json"), 'w') as f:
+with open(METADATA_DIR / "preprocessing_metadata.json", 'w') as f:
     json.dump(metadata, f, indent=2)
 print("✓ Saved: preprocessing_metadata.json")
 
@@ -526,5 +536,5 @@ Feature engineering will create:
 """)
 
 print("\n✓ All preprocessing scripts completed and saved")
-print(f"✓ Output directory: {data_path}")
+print(f"✓ Output directory: {OUTPUT_DIR}")
 

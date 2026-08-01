@@ -18,10 +18,20 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
 
 # Set visualization style
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (14, 6)
+
+# =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+SCRIPT_DIR = Path(__file__).resolve().parent
+LOAD_DIR    = SCRIPT_DIR / "loaded"
+OUTPUT_DIR  = SCRIPT_DIR / "statistics"
+LOAD_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # =====================================================================================
 # LOAD DATA FROM PREVIOUS STEP
@@ -30,10 +40,9 @@ print("=" * 85)
 print("LOADING DATA FROM PREVIOUS STEP")
 print("=" * 85)
 
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning"
-train_data = pd.read_csv(os.path.join(data_path, "train_FD001_loaded.csv"))
-test_data = pd.read_csv(os.path.join(data_path, "test_FD001_loaded.csv"))
-rul_data = pd.read_csv(os.path.join(data_path, "rul_FD001_loaded.csv"))
+train_data = pd.read_csv(LOAD_DIR / "train_FD001_loaded.csv")
+test_data = pd.read_csv(LOAD_DIR / "test_FD001_loaded.csv")
+rul_data = pd.read_csv(LOAD_DIR / "rul_FD001_loaded.csv")
 
 print("[OK] Data loaded successfully")
 print(f"  - Training data: {train_data.shape}")
@@ -335,17 +344,12 @@ NEXT STEP: Explore basic descriptive statistics and distributions
 """)
 
 # Save results
-variance_df_train.to_csv(
-    os.path.join(data_path, "variance_analysis_train.csv"),
-    index=False
-)
-variance_df_test.to_csv(
-    os.path.join(data_path, "variance_analysis_test.csv"),
-    index=False
-)
+variance_df_train.to_csv(OUTPUT_DIR / "variance_analysis_train.csv", index=False)
+variance_df_test.to_csv(OUTPUT_DIR / "variance_analysis_test.csv", index=False)
 
 print("\n[OK] Variance analysis saved")
 print("  - variance_analysis_train.csv")
 print("  - variance_analysis_test.csv")
+print(f"  Saved in: {OUTPUT_DIR}")
 
 

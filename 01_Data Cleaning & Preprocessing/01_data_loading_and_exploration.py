@@ -18,6 +18,31 @@ No data transformations are performed in this step - only exploration.
 import pandas as pd
 import numpy as np
 import os
+from pathlib import Path
+
+# =====================================================================================
+# DYNAMIC PROJECT PATHS  (works on any computer)
+# =====================================================================================
+# This script lives in:  <project>/01_Data Cleaning & Preprocessing/
+# Phase-1 inputs  (NASA raw .txt files) and all phase-1 outputs sit in THIS folder.
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent  # <project>/
+
+# Source data files (NASA CMAPSS .txt files) - kept here for convenience.
+# If the user has them on disk, they can drop them in this folder; otherwise
+# the script falls back to the original sibling location one level up.
+SOURCE_DIR = PROJECT_ROOT / "CMAPSSData"
+if not SOURCE_DIR.exists():
+    SOURCE_DIR = SCRIPT_DIR  # fallback: source files may also live in the phase folder
+
+# Output directory for this phase's files (always the phase folder itself).
+OUTPUT_DIR = SCRIPT_DIR / "loaded"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Raw input files
+train_file = SOURCE_DIR / "train_FD001.txt"
+test_file = SOURCE_DIR / "test_FD001.txt"
+rul_file = SOURCE_DIR / "RUL_FD001.txt"
 
 # =====================================================================================
 # STEP 1: LOAD THE THREE NASA DATASET FILES
@@ -25,12 +50,6 @@ import os
 print("=" * 85)
 print("STEP 1: LOADING NASA C-MAPSS FD001 DATASET FILES")
 print("=" * 85)
-
-# Define paths to the dataset files
-data_path = r"C:\Users\Vatsal\OneDrive\Desktop\msc project\CMAPSSData"
-train_file = os.path.join(data_path, "train_FD001.txt")
-test_file = os.path.join(data_path, "test_FD001.txt")
-rul_file = os.path.join(data_path, "RUL_FD001.txt")
 
 # WHY THIS STEP IS NECESSARY:
 print("\nWHY THIS STEP IS NECESSARY:")
@@ -245,24 +264,14 @@ print(f"""
 Next Step: Check data types and missing values
 """)
 
-# Save the dataframes for the next preprocessing step
-train_data.to_csv(
-    r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning\train_FD001_loaded.csv",
-    index=False
-)
-test_data.to_csv(
-    r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning\test_FD001_loaded.csv",
-    index=False
-)
-rul_data.to_csv(
-    r"C:\Users\Vatsal\OneDrive\Desktop\msc project\data_cleaning\rul_FD001_loaded.csv",
-    index=False
-)
+# Save the dataframes for the next preprocessing step (all in THIS phase folder)
+train_data.to_csv(OUTPUT_DIR / "train_FD001_loaded.csv", index=False)
+test_data.to_csv(OUTPUT_DIR / "test_FD001_loaded.csv", index=False)
+rul_data.to_csv(OUTPUT_DIR / "rul_FD001_loaded.csv", index=False)
 
 print("\n[OK] Intermediate data saved for next step")
 print("  Files created:")
 print("  - train_FD001_loaded.csv")
 print("  - test_FD001_loaded.csv")
 print("  - rul_FD001_loaded.csv")
-
-
+print(f"  Saved in: {OUTPUT_DIR}")
