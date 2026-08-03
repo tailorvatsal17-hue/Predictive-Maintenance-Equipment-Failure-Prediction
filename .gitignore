@@ -28,6 +28,16 @@ preprocessing_metadata.json
 training_metadata.json
 FOLDER_STRUCTURE_MAP.txt
 
+# One-off helper scripts (compression passes, analysis helpers)
+/_compress_*.py
+/_dump_*.json
+/_section_counts_*.py
+/_print_section_text_*.py
+/_find_paragraph_indices_*.py
+/_add_rq3_paragraph.py
+/_fix_mse_reporting.py
+check_procs.ps1
+
 # OS
 .DS_Store
 Thumbs.db
@@ -35,4 +45,8 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Word / Office temporary files
+~$*.docx
+*.docx.bak
 
