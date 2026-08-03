@@ -36,8 +36,3 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Historical pipeline output snapshot — preserved on disk for reference but
-# not part of the active repo. All pipeline scripts now write into
-# `<phase>/<sub-folder>/` directly, so this folder is purely a snapshot.
-data_cleaning/
-

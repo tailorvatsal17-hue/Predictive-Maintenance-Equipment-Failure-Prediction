@@ -20,7 +20,7 @@ from pathlib import Path
 
 # Project directories (dynamic, works on any computer)
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Scripts to execute
 SCRIPTS = [
