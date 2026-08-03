@@ -50,8 +50,8 @@ warnings.filterwarnings("ignore")
 # Dynamic project paths — work on any computer
 # ----------------------------------------------------------------------------
 SCRIPT_DIR = Path(__file__).resolve().parent          # this phase folder
-PROJECT_DIR = SCRIPT_DIR.parent                       # data_cleaning root
-PHASE4_DIR = PROJECT_DIR / "04_RUL Prediction"        # predictions live there
+PROJECT_DIR = SCRIPT_DIR.parent                       # project root
+PHASE4_DIR = PROJECT_DIR / "04_RUL Prediction" / "predictions"  # predictions live there
 PHASE5_DIR = PROJECT_DIR / "05_Performance Evaluation"
 
 # Output folder for this phase is the phase folder itself.

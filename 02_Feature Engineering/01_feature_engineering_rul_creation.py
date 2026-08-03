@@ -31,21 +31,19 @@ from pathlib import Path
 
 # Project directories
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Phase-1 outputs live in the "01_Data Cleaning & Preprocessing" folder
 PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
 
-# Phase-2 outputs go in THIS folder
-OUTPUT_DIR = SCRIPT_DIR
-
-# File paths
-TRAIN_SCALED_FILE = PHASE1_DIR / "train_FD001_scaled.csv"
-TRAIN_REFERENCE_FILE = PHASE1_DIR / "train_reference.csv"
-RUL_GROUND_TRUTH_FILE = PHASE1_DIR / "rul_reference.csv"
-
-# Make sure the output directory exists
+# Phase-2 intermediate outputs go in this phase's intermediate/ sub-folder
+OUTPUT_DIR = SCRIPT_DIR / "intermediate"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# File paths — phase-1 outputs live in shared/
+TRAIN_SCALED_FILE       = PHASE1_DIR / "shared" / "train_FD001_scaled.csv"
+TRAIN_REFERENCE_FILE    = PHASE1_DIR / "shared" / "train_reference.csv"
+RUL_GROUND_TRUTH_FILE   = PHASE1_DIR / "shared" / "rul_reference.csv"
 
 print("=" * 80)
 print("FEATURE ENGINEERING - PART 1: RUL TARGET VARIABLE CREATION")

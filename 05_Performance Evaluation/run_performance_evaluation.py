@@ -32,10 +32,10 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # Dynamic project paths - works on any computer
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
-# Predictions come from Phase 4
-PHASE4_DIR = PROJECT_DIR / "04_RUL Prediction"
+# Predictions come from Phase 4's predictions/ sub-folder
+PHASE4_DIR = PROJECT_DIR / "04_RUL Prediction" / "predictions"
 
 # RUL ground truth is produced by Phase 1 (kept inside its folder)
 PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
@@ -49,14 +49,16 @@ GROUND_TRUTH_FILE = SOURCE_DIR / "RUL_FD001.txt"
 
 # If the .txt file doesn't exist, fall back to the CSV written by Phase 1
 if not GROUND_TRUTH_FILE.exists():
-    candidate = PHASE1_DIR / "RUL_FD001_reference.csv"
+    candidate = PHASE1_DIR / "shared" / "RUL_FD001_reference.csv"
+    if not candidate.exists():
+        candidate = PHASE1_DIR / "RUL_FD001_reference.csv"
     if candidate.exists():
         GROUND_TRUTH_FILE = candidate
 
 PRED_FILES = {
-    "Random Forest": PHASE4_DIR / "random_forest_predictions.csv",
-    "XGBoost": PHASE4_DIR / "xgboost_predictions.csv",
-    "Neural Network": PHASE4_DIR / "neural_network_predictions.csv",
+    "Random Forest":   PHASE4_DIR / "random_forest_predictions.csv",
+    "XGBoost":         PHASE4_DIR / "xgboost_predictions.csv",
+    "Neural Network":  PHASE4_DIR / "neural_network_predictions.csv",
 }
 
 OUTPUT_DIR = SCRIPT_DIR / "performance_evaluation"

@@ -33,17 +33,19 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
-# Inputs come from Phase 1 outputs in the previous folder
-PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
+# Inputs come from this phase's previous step (also in this folder's
+# intermediate/ sub-folder). Phase 1 outputs feed script 01 only.
+PHASE2_DIR = SCRIPT_DIR
+
+# Phase-2 intermediate outputs go in this phase's intermediate/ sub-folder
+OUTPUT_DIR = SCRIPT_DIR / "intermediate"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # File paths
-INPUT_FILE = PHASE1_DIR / "train_FD001_with_rul.csv"
-OUTPUT_FILE = SCRIPT_DIR / "train_FD001_with_timeseries_features.csv"
-
-# Make sure output directory exists
-SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+INPUT_FILE  = OUTPUT_DIR / "train_FD001_with_rul.csv"
+OUTPUT_FILE = OUTPUT_DIR / "train_FD001_with_timeseries_features.csv"
 
 # Feature engineering parameters
 ROLLING_WINDOWS = [3, 5, 10]  # Cycle windows for rolling statistics

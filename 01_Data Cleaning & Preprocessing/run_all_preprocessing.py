@@ -50,7 +50,7 @@ print("=" * 90)
 # DYNAMIC PROJECT PATHS  (works on any computer)
 # =====================================================================================
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent.parent  # <project>/
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Source data files - prefer a sibling CMAPSSData folder, fall back to this folder
 SOURCE_DIR = PROJECT_DIR / "CMAPSSData"

@@ -33,26 +33,30 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
-# Inputs come from this phase's previous step (also in this folder)
-# Plus raw scaled data from Phase 1 folder
+# Inputs come from this phase's previous step (in intermediate/)
+# Plus raw scaled data from Phase 1's shared/ sub-folder
 PHASE1_DIR = PROJECT_DIR / "01_Data Cleaning & Preprocessing"
 
+# Output sub-folders: shared/ for handoff CSVs, reports/ for the
+# validation text reports.
+SHARED_DIR  = SCRIPT_DIR / "shared"
+REPORTS_DIR = SCRIPT_DIR / "reports"
+SHARED_DIR.mkdir(parents=True, exist_ok=True)
+REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+
 # File paths
-TRAIN_FINAL_INPUT = SCRIPT_DIR / "train_FD001_engineered_final.csv"
-TEST_SCALED_FILE = PHASE1_DIR / "test_FD001_scaled.csv"
-TEST_REFERENCE_FILE = PHASE1_DIR / "test_reference.csv"
-RUL_REFERENCE_FILE = PHASE1_DIR / "rul_reference.csv"
+TRAIN_FINAL_INPUT  = SCRIPT_DIR / "intermediate" / "train_FD001_engineered_final.csv"
+TEST_SCALED_FILE   = PHASE1_DIR / "shared" / "test_FD001_scaled.csv"
+TEST_REFERENCE_FILE = PHASE1_DIR / "shared" / "test_reference.csv"
+RUL_REFERENCE_FILE = PHASE1_DIR / "shared" / "rul_reference.csv"
 
 # Output files
-TRAIN_OUTPUT = SCRIPT_DIR / "train_FD001_engineered.csv"
-TEST_OUTPUT = SCRIPT_DIR / "test_FD001_engineered.csv"
-VALIDATION_REPORT = SCRIPT_DIR / "FEATURE_ENGINEERING_VALIDATION.md"
-FEATURE_LIST = SCRIPT_DIR / "ENGINEERED_FEATURES_LIST.txt"
-
-# Make sure output directory exists
-SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+TRAIN_OUTPUT       = SHARED_DIR / "train_FD001_engineered.csv"
+TEST_OUTPUT        = SHARED_DIR / "test_FD001_engineered.csv"
+VALIDATION_REPORT  = REPORTS_DIR / "FEATURE_ENGINEERING_VALIDATION.md"
+FEATURE_LIST       = REPORTS_DIR / "ENGINEERED_FEATURES_LIST.txt"
 
 print("=" * 80)
 print("FEATURE ENGINEERING - PART 4: VALIDATION & FINALIZATION")

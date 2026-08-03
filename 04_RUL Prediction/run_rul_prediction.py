@@ -25,26 +25,26 @@ import pandas as pd
 
 # Dynamic project paths - works on any computer
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Models come from Phase 3's "models" subfolder
 MODEL_DIR = PROJECT_DIR / "03_Model Training" / "models"
 
-# Test data comes from Phase 2's outputs
-TEST_FILE = PROJECT_DIR / "02_Feature Engineering" / "test_FD001_engineered.csv"
+# Test data comes from Phase 2's shared/ subfolder
+TEST_FILE = PROJECT_DIR / "02_Feature Engineering" / "shared" / "test_FD001_engineered.csv"
 METADATA_FILE = MODEL_DIR / "training_metadata.json"
 
 RF_MODEL_FILE = MODEL_DIR / "random_forest_rul.joblib"
 XGB_MODEL_FILE = MODEL_DIR / "xgboost_rul.joblib"
 NN_MODEL_FILE = MODEL_DIR / "neural_network_rul.joblib"
 
-# Predictions are saved in THIS phase's folder
-OUTPUT_RF = SCRIPT_DIR / "random_forest_predictions.csv"
-OUTPUT_XGB = SCRIPT_DIR / "xgboost_predictions.csv"
-OUTPUT_NN = SCRIPT_DIR / "neural_network_predictions.csv"
+# Predictions are saved in this phase's predictions/ sub-folder
+OUTPUT_DIR = SCRIPT_DIR / "predictions"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Make sure the output directory exists
-SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_RF  = OUTPUT_DIR / "random_forest_predictions.csv"
+OUTPUT_XGB = OUTPUT_DIR / "xgboost_predictions.csv"
+OUTPUT_NN  = OUTPUT_DIR / "neural_network_predictions.csv"
 
 print("=" * 80)
 print("RUL PREDICTION PIPELINE")

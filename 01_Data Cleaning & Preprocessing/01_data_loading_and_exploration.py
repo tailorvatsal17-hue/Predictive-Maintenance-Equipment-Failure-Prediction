@@ -26,7 +26,7 @@ from pathlib import Path
 # This script lives in:  <project>/01_Data Cleaning & Preprocessing/
 # Phase-1 inputs  (NASA raw .txt files) and all phase-1 outputs sit in THIS folder.
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR.parent.parent  # <project>/
+PROJECT_ROOT = SCRIPT_DIR.parent  # <project>/
 
 # Source data files (NASA CMAPSS .txt files) - kept here for convenience.
 # If the user has them on disk, they can drop them in this folder; otherwise

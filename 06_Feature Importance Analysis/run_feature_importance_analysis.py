@@ -30,7 +30,7 @@ from sklearn.inspection import permutation_importance
 
 # Dynamic project paths - works on any computer
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Models come from Phase 3
 MODEL_DIR = PROJECT_DIR / '03_Model Training' / 'models'
@@ -39,8 +39,8 @@ MODEL_DIR = PROJECT_DIR / '03_Model Training' / 'models'
 OUT_DIR = SCRIPT_DIR / 'feature_importance_analysis'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Engineered training data comes from Phase 2
-TRAIN_FILE = PROJECT_DIR / '02_Feature Engineering' / 'train_FD001_engineered.csv'
+# Engineered training data comes from Phase 2's shared/ sub-folder
+TRAIN_FILE = PROJECT_DIR / '02_Feature Engineering' / 'shared' / 'train_FD001_engineered.csv'
 METADATA_FILE = MODEL_DIR / 'training_metadata.json'
 
 RF_MODEL_FILE = MODEL_DIR / 'random_forest_rul.joblib'

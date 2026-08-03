@@ -35,7 +35,7 @@ except ImportError as exc:
 
 # Dynamic project paths - works on any computer
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
 # Phase-2 outputs live in the "02_Feature Engineering" folder
 PHASE2_DIR = PROJECT_DIR / "02_Feature Engineering"
@@ -44,8 +44,8 @@ PHASE2_DIR = PROJECT_DIR / "02_Feature Engineering"
 MODEL_DIR = SCRIPT_DIR / "models"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-# Engineered training data produced by Phase 2
-TRAIN_FILE = PHASE2_DIR / "train_FD001_engineered.csv"
+# Engineered training data produced by Phase 2 (lives in phase-2/shared/)
+TRAIN_FILE = PHASE2_DIR / "shared" / "train_FD001_engineered.csv"
 
 TARGET_COL = "RUL"
 DROP_COLS = ["Unit_Number", "Time_Cycles", TARGET_COL]

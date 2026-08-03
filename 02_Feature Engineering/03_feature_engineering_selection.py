@@ -32,19 +32,20 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = SCRIPT_DIR.parent  # <project>/data_cleaning
+PROJECT_DIR = SCRIPT_DIR.parent  # <project>/
 
-# Inputs come from this phase's previous step (also in this folder)
+# Inputs come from this phase's previous step (in intermediate/)
 # Phase 1 outputs are no longer needed here.
 
-# File paths
-INPUT_FILE = SCRIPT_DIR / "train_FD001_with_timeseries_features.csv"
-OUTPUT_FILE = SCRIPT_DIR / "train_FD001_engineered_final.csv"
-CORRELATION_REPORT = SCRIPT_DIR / "correlation_analysis.csv"
-FEATURE_IMPORTANCE_REPORT = SCRIPT_DIR / "feature_importance_statistical.csv"
+# Phase-2 intermediate outputs go in this phase's intermediate/ sub-folder
+OUTPUT_DIR = SCRIPT_DIR / "intermediate"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Make sure output directory exists
-SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+# File paths
+INPUT_FILE              = OUTPUT_DIR / "train_FD001_with_timeseries_features.csv"
+OUTPUT_FILE             = OUTPUT_DIR / "train_FD001_engineered_final.csv"
+CORRELATION_REPORT      = OUTPUT_DIR / "correlation_analysis.csv"
+FEATURE_IMPORTANCE_REPORT = OUTPUT_DIR / "feature_importance_statistical.csv"
 
 # Feature selection parameters
 CORRELATION_THRESHOLD = 0.95  # Remove features with correlation > 0.95 with others
