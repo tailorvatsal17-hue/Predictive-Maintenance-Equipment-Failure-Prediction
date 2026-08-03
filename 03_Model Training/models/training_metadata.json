@@ -1,5 +1,5 @@
 {
-  "training_file": "C:\\Users\\Vatsal\\OneDrive\\Desktop\\msc project\\data_cleaning\\train_FD001_engineered.csv",
+  "training_file": "C:\\Users\\Vatsal\\OneDrive\\Desktop\\msc project\\02_Feature Engineering\\train_FD001_engineered.csv",
   "n_samples": 20631,
   "n_features": 212,
   "feature_columns": [
