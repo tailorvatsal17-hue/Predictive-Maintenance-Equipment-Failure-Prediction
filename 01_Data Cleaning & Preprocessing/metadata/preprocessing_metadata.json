@@ -1,0 +1,52 @@
+{
+  "Dataset": "NASA CMAPSS FD001",
+  "Stage": "Data Cleaning & Preprocessing",
+  "Columns_Removed": [
+    "Unit_Number",
+    "Time_Cycles",
+    "Op_Setting_1",
+    "Op_Setting_2",
+    "Op_Setting_3"
+  ],
+  "Columns_Kept": [
+    "Sensor_1",
+    "Sensor_2",
+    "Sensor_3",
+    "Sensor_4",
+    "Sensor_5",
+    "Sensor_6",
+    "Sensor_7",
+    "Sensor_8",
+    "Sensor_9",
+    "Sensor_10",
+    "Sensor_11",
+    "Sensor_12",
+    "Sensor_13",
+    "Sensor_14",
+    "Sensor_15",
+    "Sensor_16",
+    "Sensor_17",
+    "Sensor_18",
+    "Sensor_19",
+    "Sensor_20",
+    "Sensor_21"
+  ],
+  "Scaling_Method": "RobustScaler",
+  "Training_Shape_Original": [
+    20631,
+    26
+  ],
+  "Training_Shape_Cleaned": [
+    20631,
+    21
+  ],
+  "Test_Shape_Original": [
+    13096,
+    26
+  ],
+  "Test_Shape_Cleaned": [
+    13096,
+    21
+  ],
+  "Notes": "Operational settings removed (constant in FD001). All 21 sensors retained. Data ready for feature engineering."
+}

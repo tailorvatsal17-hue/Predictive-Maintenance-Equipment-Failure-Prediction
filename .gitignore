@@ -14,19 +14,12 @@ venv/
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
-# Pickle / joblib models
+# Pickle / joblib models (kept in repo as artefacts)
 *.pkl
-*.joblib
 
-# Visualizations / images
-*.png
-*.jpg
-*.jpeg
+# Visualizations / images are committed as project artefacts
 
-# Logs & metadata
-preprocessing_metadata.json
-training_metadata.json
-FOLDER_STRUCTURE_MAP.txt
+# Logs (metadata is committed as project artefacts)
 
 # One-off helper scripts (compression passes, analysis helpers)
 /_compress_*.py
